@@ -10,10 +10,13 @@ const NotificationCenter = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
 
-  useEffect(() => {
+   useEffect(() => {
     if (!user) return;
 
-    const socket = io('http://localhost:5000');
+    const socketUrl = import.meta.env.VITE_API_URL
+      ? import.meta.env.VITE_API_URL.replace(/\/api$/, '')
+      : window.location.origin;
+    const socket = io(socketUrl);
     socket.emit('join', user._id);
 
     socket.on('notification', (notification) => {
@@ -23,7 +26,7 @@ const NotificationCenter = () => {
       }
     });
 
-    // Fetch history
+     
     // (We could add an endpoint for this, but for now we'll just handle real-time)
 
     return () => socket.disconnect();
