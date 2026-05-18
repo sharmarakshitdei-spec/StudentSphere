@@ -97,6 +97,8 @@ npm run dev
 
 - GitHub: https://github.com/sharmarakshitdei-spec
 
+- Live Demo: https://student-sphere-sage.vercel.app/
+
 ---
 
 ## 📄 License
@@ -109,9 +111,4 @@ This project is licensed under the MIT License.
   Built with ❤️ using the MERN Stack
 </p>
 
----
 
-<p>
-- Live Demo: https://student-sphere-sage.vercel.app/
-</p>
----
