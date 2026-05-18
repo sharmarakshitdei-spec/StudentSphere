@@ -1,7 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-const API_URL = 'http://localhost:5000/api/auth';
+import API from '../../services/api';
 
 let user = null;
 try {
@@ -24,7 +22,7 @@ export const register = createAsyncThunk(
   'auth/register',
   async (userData, thunkAPI) => {
     try {
-      const response = await axios.post(`${API_URL}/register`, userData);
+      const response = await API.post('/auth/register', userData);
       if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data));
       }
@@ -44,7 +42,7 @@ export const register = createAsyncThunk(
 // Login user
 export const login = createAsyncThunk('auth/login', async (userData, thunkAPI) => {
   try {
-    const response = await axios.post(`${API_URL}/login`, userData);
+    const response = await API.post('/auth/login', userData);
     if (response.data) {
       localStorage.setItem('user', JSON.stringify(response.data));
     }
