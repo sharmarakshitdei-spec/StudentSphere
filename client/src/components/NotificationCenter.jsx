@@ -10,11 +10,13 @@ const NotificationCenter = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
 
-   useEffect(() => {
+  useEffect(() => {
     if (!user) return;
 
-    const socketUrl = import.meta.env.VITE_API_URL
-      ? import.meta.env.VITE_API_URL.replace(/\/api$/, '')
+    const rawApiUrl = import.meta.env.VITE_API_URL;
+    const apiUrl = rawApiUrl ? rawApiUrl.replace(/\/+$/, '') : null;
+    const socketUrl = apiUrl
+      ? apiUrl.replace(/\/api$/, '')
       : window.location.origin;
     const socket = io(socketUrl);
     socket.emit('join', user._id);
@@ -26,7 +28,7 @@ const NotificationCenter = () => {
       }
     });
 
-     
+    // Fetch history
     // (We could add an endpoint for this, but for now we'll just handle real-time)
 
     return () => socket.disconnect();
